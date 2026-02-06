@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffeef2;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 { color: #d63384; }
+        p { color: #555; }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #yesBtn:hover { background-color: #ff758f; transform: scale(1.1); }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute;
+        }
+
+        .hidden { display: none; }
+
+        .gift-card {
+            margin: 10px;
+            padding: 15px;
+            border: 2px solid #ff4d6d;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .gift-card:hover { background-color: #fff0f3; }
+
+        #finalMessage {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d63384;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="container">
+        <h1>Nichu Will you be my Valentine? 💖</h1>
+        <div class="btn-group">
+            <button id="yesBtn" onclick="goToPage2()">Yes!</button>
+            <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+        </div>
+    </div>
+
+    <div id="page2" class="container hidden">
+        <h1>Yay! Pick your gift 🎁</h1>
+        <p>Choose wisely...</p>
+        <div class="gift-card" onclick="showGift('A bouquet of your favorite red roses! 🌹')">Flowers</div>
+        <div class="gift-card" onclick="showGift('A fancy dinner at your favorite spot! 🍝')">Food</div>
+        <div class="gift-card" onclick="showGift('A whole day of my undivided attention and cuddles! 👩‍❤️‍👨')">Me</div>
+        <div id="finalMessage"></div>
+    </div>
+
+    <script>
+        // Move the "No" button randomly
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Switch to the gift selection page
+        function goToPage2() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        }
+
+        // Show the recommended gift result
+        function showGift(message) {
+            const display = document.getElementById('finalMessage');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerText = "Coming right up: " + message;
+                display.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+</body>
+</html>
